@@ -15,9 +15,9 @@ class SearchProductsProvider extends ChangeNotifier {
   bool get error => _error;
   List<ProductByKeywordModel> get productData => _productsModel;
 
-  Future<void> getProductData() async {
+  Future<void> getSearchData(String searchKey) async {
     var url = Uri.parse("${baseUrl}call-back-productsearch");
-    Map reqBody = {"location_id": "429", "keyword": "appam"};
+    Map reqBody = {"location_id": "429", "keyword": searchKey};
 
     try {
       var response = await http.post(url, body: reqBody);

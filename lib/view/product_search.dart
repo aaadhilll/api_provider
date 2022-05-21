@@ -1,17 +1,157 @@
+import 'package:api_ktm/constants/network_helper.dart';
+import 'package:api_ktm/view/product_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+import 'package:get/get.dart';
+
+import 'package:provider/provider.dart';
+
+import '../provider/product_by_search_provider.dart';
+import '../provider/product_byid_provider.dart';
+
+class NewSearchScreen extends StatefulWidget {
+  const NewSearchScreen({Key? key}) : super(key: key);
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  _NewSearchScreenState createState() => _NewSearchScreenState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _NewSearchScreenState extends State<NewSearchScreen> {
+  FocusNode focusNode = FocusNode();
+  @override
+  void initState() {
+    focusNode.requestFocus();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListTile();
+    var availableHeight =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+    double availableWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(elevation: 0, toolbarHeight: 0),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 10, right: 10, left: 10),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                color: Colors.white,
+                child: Container(
+                  padding: EdgeInsets.only(left: 12),
+                  child: TextFormField(
+                    cursorColor: Colors.grey,
+                    focusNode: focusNode,
+                    onChanged: (searchText) {
+                      if (searchText.isEmpty) {
+                        Provider.of<SearchProductsProvider>(context,
+                                listen: false)
+                            .getSearchData("");
+                      }
+
+                      Provider.of<SearchProductsProvider>(context,
+                              listen: false)
+                          .getSearchData(searchText);
+                    },
+                    style: TextStyle(fontSize: 16, color: Colors.black54),
+                    decoration: const InputDecoration(
+                      hintText: "Search Products",
+                      border: InputBorder.none,
+                      fillColor: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Consumer<SearchProductsProvider>(
+              builder: (context, value, child) {
+                return value.isLoading == true
+                    ? Center(
+                        child: Padding(
+                        padding: EdgeInsets.only(top: availableHeight / 3),
+                        child: const CircularProgressIndicator(),
+                      ))
+                    : value.error == true
+                        ? Center(child: Text("Something went wrong"))
+                        : value.productData.isEmpty && value.error == false
+                            ? const Center(child: Text("No products available"))
+                            : SizedBox(
+                                width: availableWidth,
+                                height: availableHeight - 80,
+                                child: ShaderMask(
+                                  shaderCallback: (Rect rect) {
+                                    return const LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        Colors.purple,
+                                        Colors.transparent,
+                                        Colors.transparent,
+                                        Colors.purple
+                                      ],
+                                      stops: [
+                                        0.0,
+                                        0.08,
+                                        1.0,
+                                        1.0
+                                      ], // 10% purple, 80% transparent, 10% purple
+                                    ).createShader(rect);
+                                  },
+                                  blendMode: BlendMode.dstOut,
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.only(top: 20),
+                                    physics:
+                                        const AlwaysScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: value.productData.length,
+                                    itemBuilder: (context, i) {
+                                      return Card(
+                                        color: Colors.white,
+                                        child: ListTile(
+                                          title: Text(
+                                              value.productData[i].proName,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                  color: Colors.black87)),
+                                          trailing: Image.network(imageBase +
+                                              value.productData[i].image),
+                                          onTap: () {
+                                            Provider.of<ProductByIdProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .onReLoad();
+                                            Provider.of<ProductByIdProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .fetchProduct(
+                                                    value.productData[i].id);
+                                            Get.to(() => ProductDetail());
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

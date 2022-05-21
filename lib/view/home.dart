@@ -2,9 +2,12 @@ import 'package:api_ktm/constants/network_helper.dart';
 import 'package:api_ktm/provider/product_byid_provider.dart';
 import 'package:api_ktm/provider/product_list_provider.dart';
 import 'package:api_ktm/view/product_detail.dart';
+import 'package:api_ktm/view/product_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/product_by_search_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     Provider.of<ProductListProvider>(context, listen: false).getProductData();
+    Provider.of<SearchProductsProvider>(context, listen: false)
+        .getSearchData("a");
     super.initState();
   }
 
@@ -25,6 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Get.to(() => const NewSearchScreen());
+          },
+          icon: Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+        ),
         title: const Text("Products"),
         backgroundColor: Colors.black,
       ),
