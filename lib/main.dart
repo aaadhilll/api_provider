@@ -1,3 +1,4 @@
+import 'package:api_ktm/provider/product_by_search_provider.dart';
 import 'package:api_ktm/provider/product_byid_provider.dart';
 import 'package:api_ktm/provider/product_list_provider.dart';
 import 'package:api_ktm/view/home.dart';
@@ -9,6 +10,7 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => ProductListProvider()),
     ChangeNotifierProvider(create: (_) => ProductByIdProvider()),
+    ChangeNotifierProvider(create: (_) => SearchProductsProvider()),
   ], child: const MyApp()));
 }
 

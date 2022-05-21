@@ -24,7 +24,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text("Products")),
+      appBar: AppBar(
+        title: const Text("Products"),
+        backgroundColor: Colors.black,
+      ),
       body: Consumer<ProductListProvider>(
         builder: (context, value, child) {
           return value.isLoading == true
@@ -36,20 +39,45 @@ class _HomeScreenState extends State<HomeScreen> {
                       : ListView.builder(
                           itemCount: value.productData.length,
                           itemBuilder: (context, i) {
-                            return ListTile(
-                              title: Text(value.productData[i].proName),
-                              leading: Image(
-                                  image: NetworkImage(
-                                      imageBase + value.productData[i].image)),
-                              onTap: () {
-                                Provider.of<ProductByIdProvider>(context,
-                                        listen: false)
-                                    .onReLoad();
-                                Provider.of<ProductByIdProvider>(context,
-                                        listen: false)
-                                    .fetchProduct(value.productData[i].id);
-                                Get.to(() => const ProductDetail());
-                              },
+                            return Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                height: 100,
+                                width: double.infinity,
+                                color: Colors.grey[300],
+                                child: ListTile(
+                                  title: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(value.productData[i].proName),
+                                      Text(
+                                          "Price :${value.productData[i].price}"),
+                                    ],
+                                  ),
+                                  leading: Container(
+                                    height: 150,
+                                    width: 100,
+                                    // child: Image(
+                                    //     image: NetworkImage(imageBase +
+                                    //         value.productData[i].image)),
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(imageBase +
+                                                value.productData[i].image),
+                                            fit: BoxFit.fill)),
+                                  ),
+                                  onTap: () {
+                                    Provider.of<ProductByIdProvider>(context,
+                                            listen: false)
+                                        .onReLoad();
+                                    Provider.of<ProductByIdProvider>(context,
+                                            listen: false)
+                                        .fetchProduct(value.productData[i].id);
+                                    Get.to(() => ProductDetail());
+                                  },
+                                ),
+                              ),
                             );
                           });
         },
