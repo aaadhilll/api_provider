@@ -1,6 +1,6 @@
 import 'package:api_ktm/constants/network_helper.dart';
 import 'package:api_ktm/getx_controller/controller.dart';
-import 'package:api_ktm/provider/product_byid_provider.dart';
+import 'package:api_ktm/provider/product_by_id_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

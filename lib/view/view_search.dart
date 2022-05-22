@@ -1,5 +1,5 @@
 import 'package:api_ktm/constants/network_helper.dart';
-import 'package:api_ktm/view/product_detail.dart';
+import 'package:api_ktm/view/view_product.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -7,16 +7,16 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/product_by_search_provider.dart';
-import '../provider/product_byid_provider.dart';
+import '../provider/product_by_id_provider.dart';
 
-class NewSearchScreen extends StatefulWidget {
-  const NewSearchScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  _NewSearchScreenState createState() => _NewSearchScreenState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _NewSearchScreenState extends State<NewSearchScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   FocusNode focusNode = FocusNode();
   @override
   void initState() {

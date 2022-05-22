@@ -1,8 +1,8 @@
 import 'package:api_ktm/constants/network_helper.dart';
-import 'package:api_ktm/provider/product_byid_provider.dart';
+import 'package:api_ktm/provider/product_by_id_provider.dart';
 import 'package:api_ktm/provider/product_list_provider.dart';
-import 'package:api_ktm/view/product_detail.dart';
-import 'package:api_ktm/view/product_search.dart';
+import 'package:api_ktm/view/view_product.dart';
+import 'package:api_ktm/view/view_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -32,14 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Get.to(() => const NewSearchScreen());
+            Get.to(() => const SearchScreen());
           },
           icon: Icon(
             Icons.search,
             color: Colors.white,
           ),
         ),
-        title: const Text("Products"),
+        title: const Text("Search"),
         backgroundColor: Colors.black,
       ),
       body: Consumer<ProductListProvider>(

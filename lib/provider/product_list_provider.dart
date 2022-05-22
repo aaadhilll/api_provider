@@ -1,5 +1,5 @@
 import 'package:api_ktm/constants/network_helper.dart';
-import 'package:api_ktm/model/productlist_model.dart';
+import 'package:api_ktm/model/productlist.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,14 +7,14 @@ class ProductListProvider extends ChangeNotifier {
   bool _isLoading = true;
   late bool _isSuccess;
   late bool _error;
-  List<ProductModel> _productsModel = [];
+  List<ProducListModel> _productsModel = [];
 
   //getters
 
   bool get isLoading => _isLoading;
   bool get isSuccess => _isSuccess;
   bool get error => _error;
-  List<ProductModel> get productData => _productsModel;
+  List<ProducListModel> get productData => _productsModel;
 
   Future<void> getProductData() async {
     var url = Uri.parse("${baseUrl}call-back-products-by-loc");

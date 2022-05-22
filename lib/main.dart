@@ -1,7 +1,7 @@
 import 'package:api_ktm/provider/product_by_search_provider.dart';
-import 'package:api_ktm/provider/product_byid_provider.dart';
+import 'package:api_ktm/provider/product_by_id_provider.dart';
 import 'package:api_ktm/provider/product_list_provider.dart';
-import 'package:api_ktm/view/home.dart';
+import 'package:api_ktm/view/view_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

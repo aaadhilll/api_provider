@@ -1,10 +1,11 @@
 import 'dart:convert';
 
-List<ProductModel> productModelFromJson(String str) => List<ProductModel>.from(
-    json.decode(str).map((x) => ProductModel.fromJson(x)));
+List<ProducListModel> productModelFromJson(String str) =>
+    List<ProducListModel>.from(
+        json.decode(str).map((x) => ProducListModel.fromJson(x)));
 
-class ProductModel {
-  ProductModel({
+class ProducListModel {
+  ProducListModel({
     required this.id,
     required this.proName,
     required this.price,
@@ -36,7 +37,8 @@ class ProductModel {
   String longitude;
   String latitude;
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
+  factory ProducListModel.fromJson(Map<String, dynamic> json) =>
+      ProducListModel(
         id: json["id"] ?? "",
         proName: json["pro_name"] ?? "",
         price: json["price"],
