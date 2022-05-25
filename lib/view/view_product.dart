@@ -13,7 +13,7 @@ class ProductDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("back"),
+        title: const Text("back"),
         backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.white,
@@ -41,26 +41,39 @@ class ProductDetail extends StatelessWidget {
                             ),
                             Text(
                               value.productData.proName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Text(
+                                const Text(
                                   "Price :",
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 Text(
                                   value.productData.price,
-                                  style: TextStyle(fontSize: 20),
+                                  style: const TextStyle(fontSize: 20),
                                 )
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
+                                const Text(
+                                  "Buy Now :",
+                                  style: TextStyle(fontSize: 20),
+                                ),
                                 Text(
+                                  value.productData.sellingPrice,
+                                  style: const TextStyle(fontSize: 20),
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                const Text(
                                   'Quantity :',
                                   style: TextStyle(fontSize: 20),
                                 ),
@@ -70,18 +83,18 @@ class ProductDetail extends StatelessWidget {
                                         onPressed: () {
                                           _controller.incriment();
                                         },
-                                        icon: Icon(Icons.add)),
+                                        icon: const Icon(Icons.add)),
                                     Obx(
                                       () => Text(
                                         '${_controller.count.value}',
-                                        style: TextStyle(fontSize: 20),
+                                        style: const TextStyle(fontSize: 20),
                                       ),
                                     ),
                                     IconButton(
                                         onPressed: () {
                                           _controller.decriment();
                                         },
-                                        icon: Icon(Icons.remove)),
+                                        icon: const Icon(Icons.remove)),
                                   ],
                                 ),
                               ],
@@ -90,13 +103,15 @@ class ProductDetail extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Total Price : ",
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     Text(
-                                      "${_controller.count.value * int.parse(value.productData.price)}",
-                                      style: TextStyle(fontSize: 20),
+                                      "${_controller.count.value * int.parse(
+                                            value.productData.sellingPrice,
+                                          )}",
+                                      style: const TextStyle(fontSize: 20),
                                     )
                                   ],
                                 )),
@@ -105,8 +120,8 @@ class ProductDetail extends StatelessWidget {
                                     backgroundColor: MaterialStateProperty.all(
                                         Colors.green)),
                                 onPressed: () {},
-                                child: Text(
-                                  "Order Now",
+                                child: const Text(
+                                  "Buy Now",
                                   style: TextStyle(fontSize: 20),
                                 ))
                           ],

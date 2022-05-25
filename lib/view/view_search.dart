@@ -43,14 +43,14 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(top: 10, right: 10, left: 10),
+              padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
                 color: Colors.white,
                 child: Container(
-                  padding: EdgeInsets.only(left: 12),
+                  padding: const EdgeInsets.only(left: 12),
                   child: TextFormField(
                     cursorColor: Colors.grey,
                     focusNode: focusNode,
@@ -65,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               listen: false)
                           .getSearchData(searchText);
                     },
-                    style: TextStyle(fontSize: 16, color: Colors.black54),
+                    style: const TextStyle(fontSize: 16, color: Colors.black54),
                     decoration: const InputDecoration(
                       hintText: "Search Products",
                       border: InputBorder.none,
@@ -75,7 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Consumer<SearchProductsProvider>(
               builder: (context, value, child) {
                 return value.isLoading == true
@@ -85,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: const CircularProgressIndicator(),
                       ))
                     : value.error == true
-                        ? Center(child: Text("Something went wrong"))
+                        ? const Center(child: Text("Something went wrong"))
                         : value.productData.isEmpty && value.error == false
                             ? const Center(child: Text("No products available"))
                             : SizedBox(
@@ -112,7 +112,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   },
                                   blendMode: BlendMode.dstOut,
                                   child: ListView.builder(
-                                    padding: EdgeInsets.only(top: 20),
+                                    padding: const EdgeInsets.only(top: 20),
                                     physics:
                                         const AlwaysScrollableScrollPhysics(),
                                     shrinkWrap: true,
@@ -123,7 +123,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                         child: ListTile(
                                           title: Text(
                                               value.productData[i].proName,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 16,
                                                   color: Colors.black87)),

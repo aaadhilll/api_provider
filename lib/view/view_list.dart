@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () {
             Get.to(() => const SearchScreen());
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.search,
             color: Colors.white,
           ),
@@ -65,8 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(value.productData[i].proName),
+                                      Text(value.productData[i].companyName),
                                       Text(
-                                          "Price :${value.productData[i].price}"),
+                                          "Mrp :${value.productData[i].price}"),
+                                      Text(
+                                          "Buy Now:${value.productData[i].sellingPrice}"),
                                     ],
                                   ),
                                   leading: Container(

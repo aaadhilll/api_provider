@@ -22,7 +22,7 @@ class SearchProductsProvider extends ChangeNotifier {
     try {
       var response = await http.post(url, body: reqBody);
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
         _isLoading = false;
         _error = false;
         _isSuccess = true;
